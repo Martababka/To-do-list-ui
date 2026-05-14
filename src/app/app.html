@@ -1,11 +1,14 @@
-
-  <div>
+<app-task-modal></app-task-modal>
+<section class="to-do-section">
+  <div class="list">
     @for (task of tasks; track task.id) {
-      <strong>task.description</strong>
-      <p>task.deadline</p>
-      <p>task.completed</p>
+      <div class="list-element">
+        <strong>{{ task.title }}</strong>
+        <p>{{ task.description }}</p>
+        <p>{{ task.deadline }}</p>
+        <input id="completed" type="checkbox" [value]="task.completed"/>
+      </div>
     }
   </div>
-
-  <app-task-modal></app-task-modal>
+</section>
 

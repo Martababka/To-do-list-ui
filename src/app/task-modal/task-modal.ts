@@ -12,8 +12,15 @@ import {Priority} from '../priority.enum';
 export class TaskModal {
   protected readonly taskService = inject(TaskService);
 
+  public priorityOptions = Object.values(Priority);
+
   taskForm = new FormGroup({
     id: new FormControl(null),
+
+    title: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
 
     description: new FormControl('', {
       nonNullable: true,
@@ -45,8 +52,7 @@ export class TaskModal {
     const task = this.taskForm.getRawValue();
 
     this.taskService.createTask(task).subscribe({
-      next: (response) => {
-        console.log('Task created:', response);
+      next: () => {
         this.taskForm.reset();
       },
       error: (err) => {
@@ -54,6 +60,4 @@ export class TaskModal {
       }
     });
   }
-
-  protected readonly Priority = Priority;
 }

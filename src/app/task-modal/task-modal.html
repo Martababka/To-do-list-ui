@@ -1,4 +1,7 @@
 <form class="form" [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <label for="title">Title</label>
+  <input id="title" type="text" formControlName="title"/>
+
   <label for="description">Description</label>
   <input id="description" type="text" formControlName="description"/>
 
@@ -8,12 +11,12 @@
   <label for="deadline">Deadline</label>
   <input id="deadline" type="date" formControlName="deadline"/>
 
-  <label for="priority">Priority</label>
+  <label for="priority">Priority:</label>
 
   <select id="priority" formControlName="priority">
-    <option [value]="Priority.LOW">Low</option>
-    <option [value]="Priority.MEDIUM">Medium</option>
-    <option [value]="Priority.HIGH">High</option>
+    @for (p of priorityOptions; track p) {
+      <option [value]="p">{{ p }}</option>
+    }
   </select>
 
   <button type="submit" [disabled]="taskForm.invalid">Create</button>
